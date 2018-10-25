@@ -1,7 +1,9 @@
 // @flow
 
-import { TileLayer as LeafletTileLayer } from 'leaflet'
+import L, { TileLayer as LeafletTileLayer } from 'leaflet'
 import PropTypes from 'prop-types'
+
+import './TileLayerFallback'
 
 import GridLayer from './GridLayer'
 import children from './propTypes/children'
@@ -19,7 +21,7 @@ export default class TileLayer extends GridLayer<LeafletElement, Props> {
   }
 
   createLeafletElement(props: Props): LeafletElement {
-    return new LeafletTileLayer(props.url, this.getOptions(props))
+    return new L.TileLayer.Fallback(props.url, this.getOptions(props))
   }
 
   updateLeafletElement(fromProps: Props, toProps: Props) {
